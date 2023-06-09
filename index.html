@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes</title>
+</head>
+<body>
+    <h1>Notes</h1>
+    <ul>
+        {% for note in notes %}
+        <li>
+            {{ note.title }} - {{ note.content }} 
+            <a href="{{ url_for('delete_note', id=note.id) }}">Delete</a>
+            <a href="{{ url_for('update_note', id=note.id) }}">
+                {% if note.completed %}
+                Set Uncompleted
+                {% else %}
+                Set Completed
+                {% endif %}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('add_note') }}" method="POST">
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="content" placeholder="Content">
+        <input type="submit" value="Add Note">
+    </form>
+</body>
+</html>
